@@ -30,7 +30,7 @@ Before you begin, ensure you have the following prerequisites installed:
 -   [Git](https://git-scm.com/) for version control. 
 -   [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html) for project configuration.
 -   An Integrated Development Environment (IDE) such as [Keil MDK-ARM](https://www.keil.com/mdk5) or [GCC](https://gcc.gnu.org/) for ARM. 
--   An debug emulator such as [J-Link](https://www.segger.com/jlink-debug-probes.html) debugger or STLink or DAP-Link
+-   An debug emulator such as J-Link debugger or STLink or DAP-Link
 
 ## Getting the Source Code
 
@@ -73,8 +73,20 @@ I use the Jlink debugger and use the SEGGER RTT  with the J-Link RTT Viewer soft
 | Application | User code folders, including Board Support packages (packaged as devices) , custom macros, and task scheduling related |
 |    OLED     |                  OLED screen driver library                  |
 | SEGGER_RTT  | The RTT tool, used by J-Link RTT Viewer software, is used to print logs for easy debugging |
+|     doc     |       The use of documentation and hardware schematics       |
+|  Makefile   |                   Compile using a makefile                   |
+
+Application folders explain
 
 ![image-20240802143911267](img/image-20240802143911267.png)
+
+|     file      |                           explain                            |
+| :-----------: | :----------------------------------------------------------: |
+|      BSP      |               MCU hardware peripherals support               |
+| Communication | Motor Protocol Layer Code, according to motor specifications prepared |
+|    Devices    | It encapsulates modules such as peripherals into devices, object-oriented programming and decoupling |
+|     Libs      | Custom Library files and log definitions, such as some commonly used macro definitions |
+|     Task      |       Task Scheduling Code and Custom Task Code files        |
 
 # debug problem record
 

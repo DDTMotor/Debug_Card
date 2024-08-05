@@ -46,11 +46,11 @@ static const led_device_resources_t g_led_device_resources[LED_ID_COUNT] =
 /**
  * ******************************************************************************
  * @brief 	: get a pointer to an device based on its index.
- * @param 	: arg_index [in/out], The index of the led device.
- * @retval 	: This device index corresponds to a device pointer.
+ * @param 	  arg_index  	: The index of the led device.
+ * @retval 	: ¡¾return¡¿
  * @author 	: chenningzhan
- * @note	: If the index is out of range, it logs an error and returns NULL.
- * @note	: An open interface for other modules to call to get a device pointer
+ * @note 	: If the index is out of range, it logs an error and returns NULL.
+ *            An open interface for other modules to call to get a device pointer
  * ******************************************************************************
  */
 led_device_t *led_device_get_pointer(led_device_index_t arg_index)
@@ -71,19 +71,17 @@ led_device_t *led_device_get_pointer(led_device_index_t arg_index)
 /**
  * ******************************************************************************
  * @brief 	: control the status of an led device.
- * @param 	: p_self [in/out], a pointer to get the device object
- * @param 	: arg_status [in/out], The status to set for the led device.
+ * @param 	  p_self  	: a pointer to get the device object.
+ * @param 	  status  	: The status to set for the led device
  * @author 	: chenningzhan
- * @note	: sets the led device to on or off based on the provided status, writing to the
- *            appropriate GPIO pin
+ * @note 	: sets the led device to on or off based on the provided status.
  * ******************************************************************************
  */
-
-static void led_device_ops_control(void *p_self, led_device_status_t arg_status)
+static void led_device_ops_control(void *p_self, led_device_status_t status)
 {
     led_device_t *p_dev = (led_device_t *)p_self;
 
-    switch (arg_status)
+    switch (status)
     {
     case LED_STATUS_ON:
         HAL_GPIO_WritePin(p_dev->res->gpio_port, p_dev->res->pin, p_dev->res->level_valid);
@@ -96,7 +94,7 @@ static void led_device_ops_control(void *p_self, led_device_status_t arg_status)
     }
 
     // update the current status
-    p_dev->params.status = arg_status;
+    p_dev->params.status = status;
 }
 
 /* ----------------------- public function definition ----------------------- */
@@ -104,9 +102,9 @@ static void led_device_ops_control(void *p_self, led_device_status_t arg_status)
 /**
  * ******************************************************************************
  * @brief 	: register an led device with its associated callback function.
- * @param 	: p_func [in/out], The callback function pointer for the device operations.
+ * @param 	  p_func  	: The callback function pointer for the device operations.
  * @author 	: chenningzhan
- * @note	: None
+ * @note 	: None
  * ******************************************************************************
  */
 void led_device_register(p_callback_func_dev p_func)

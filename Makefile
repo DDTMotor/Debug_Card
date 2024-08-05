@@ -41,22 +41,6 @@ Core/Src/gpio.c \
 Core/Src/can.c \
 Core/Src/tim.c \
 Core/Src/usart.c \
-Application/bsp/src/motor_can_prot.c \
-Application/bsp/src/motor_uart_prot.c \
-Application/Communication/src/motor_info.c \
-Application/task/src/task_key.c \
-Application/task/src/task_led.c \
-Application/task/src/task_buzzer.c \
-Application/task/src/task_menu.c \
-Application/task/src/task_motor_can.c \
-Application/task/src/task_motor_uart.c \
-Application/task/src/task_schedule.c \
-Application/devices/src/device_buzzer.c \
-Application/devices/src/device_key.c \
-Application/devices/src/device_menu.c \
-Application/devices/src/device_motor_can.c \
-Application/devices/src/device_motor_uart.c \
-Application/devices/src/device_led.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c \
@@ -76,12 +60,27 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c \
 Core/Src/system_stm32f1xx.c \
 Core/Src/sysmem.c \
+Core/Src/syscalls.c \
 OLED/OLED.c \
 OLED/OLED_Data.c \
 SEGGER_RTT/SEGGER_RTT.c \
 SEGGER_RTT/SEGGER_RTT_printf.c \
-Core/Src/syscalls.c  
-
+Application/Bsp/Src/motor_can_prot.c \
+Application/Bsp/Src/motor_uart_prot.c \
+Application/Communication/Src/motor_info.c \
+Application/Task/Src/task_key.c \
+Application/Task/Src/task_led.c \
+Application/Task/Src/task_buzzer.c \
+Application/Task/Src/task_menu.c \
+Application/Task/Src/task_motor_can.c \
+Application/Task/Src/task_motor_uart.c \
+Application/Task/Src/task_schedule.c \
+Application/Devices/Src/device_buzzer.c \
+Application/Devices/Src/device_key.c \
+Application/Devices/Src/device_menu.c \
+Application/Devices/Src/device_motor_can.c \
+Application/Devices/Src/device_motor_uart.c \
+Application/Devices/Src/device_led.c \
 
 # ASM sources
 ASM_SOURCES =  \
@@ -147,11 +146,10 @@ C_INCLUDES =  \
 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include \
 -IDrivers/CMSIS/Include \
 -IApplication/Libs \
--IApplication/bsp/Inc \
+-IApplication/Bsp/Inc \
 -IApplication/Communication/Inc \
 -IApplication/Devices/Inc \
 -IApplication/Task/Inc \
--ICore/Inc \
 -ISEGGER_RTT \
 -IOLED
 # compile gcc flags

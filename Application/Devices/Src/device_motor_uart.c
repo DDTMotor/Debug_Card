@@ -86,7 +86,7 @@ static void motor_device_uart_ops_parse_data(void *p_self)
         {
             if (dev->buff_rx[(i + 0) % MOTOR_DEVICE_UART_BUFF_RX_LEN] == dev->motor_id && dev->buff_rx[(i + 1) % MOTOR_DEVICE_UART_BUFF_RX_LEN] == AGT_UART_CMD_DRIVE)
             {
-                dev->motor_rec.speed = ((dev->buff_rx[(i + 2) % MOTOR_DEVICE_UART_BUFF_RX_LEN] << 8) + dev->buff_rx[(i + 3) % MOTOR_DEVICE_UART_BUFF_RX_LEN]) / 10.f;
+                dev->motor_rec.speed = ((int16_t)((dev->buff_rx[(i + 2) % MOTOR_DEVICE_UART_BUFF_RX_LEN] << 8) + dev->buff_rx[(i + 3) % MOTOR_DEVICE_UART_BUFF_RX_LEN])) / 10.f;
                 dev->motor_rec.current = (dev->buff_rx[(i + 4) % MOTOR_DEVICE_UART_BUFF_RX_LEN] << 8) + dev->buff_rx[(i + 5) % MOTOR_DEVICE_UART_BUFF_RX_LEN];
                 dev->motor_rec.temperature = dev->buff_rx[(i + 7) % MOTOR_DEVICE_UART_BUFF_RX_LEN];
                 dev->motor_rec.errcode = dev->buff_rx[(i + 8) % MOTOR_DEVICE_UART_BUFF_RX_LEN];
@@ -99,7 +99,7 @@ static void motor_device_uart_ops_parse_data(void *p_self)
         {
             if (dev->buff_rx[(i + 0) % MOTOR_DEVICE_UART_BUFF_RX_LEN] == dev->motor_id && dev->buff_rx[(i + 1) % MOTOR_DEVICE_UART_BUFF_RX_LEN] == AGT_UART_CMD_DRIVE_M0603A)
             {
-                dev->motor_rec.speed = ((dev->buff_rx[(i + 2) % MOTOR_DEVICE_UART_BUFF_RX_LEN] << 8) + dev->buff_rx[(i + 3) % MOTOR_DEVICE_UART_BUFF_RX_LEN]) / 10.f;
+                dev->motor_rec.speed = ((int16_t)((dev->buff_rx[(i + 2) % MOTOR_DEVICE_UART_BUFF_RX_LEN] << 8) + dev->buff_rx[(i + 3) % MOTOR_DEVICE_UART_BUFF_RX_LEN])) / 10.f;
                 dev->motor_rec.current = (dev->buff_rx[(i + 4) % MOTOR_DEVICE_UART_BUFF_RX_LEN] << 8) + dev->buff_rx[(i + 5) % MOTOR_DEVICE_UART_BUFF_RX_LEN];
                 dev->motor_rec.temperature = dev->buff_rx[(i + 7) % MOTOR_DEVICE_UART_BUFF_RX_LEN];
                 dev->motor_rec.errcode = dev->buff_rx[(i + 8) % MOTOR_DEVICE_UART_BUFF_RX_LEN];

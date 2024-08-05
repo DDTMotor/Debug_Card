@@ -33,10 +33,7 @@
 /* ---------------------------- macro definition ---------------------------- */
 #include "motor_info.h"
 
-/* --------------------------- struct and enum definitions --------------------------- */
-
 /* ----------------------- global variable definition ----------------------- */
-//  index             name      means   max speed rpm
 motor_info_table_t g_motor_info_table[MOTOR_ID_COUNT] = {
     {MOTOR_ID_M0601C, "M0601C", MEANS_RS485, 115200, 330},
     {MOTOR_ID_M0602C, "M0602C", MEANS_RS485, 115200, 315},

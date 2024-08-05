@@ -91,7 +91,8 @@ static void menu_device_ops_init(void *p_self)
     OLED_Update();
     OLED_ShowString(10, 0, "Direct Drive Tech", OLED_6X8);
     OLED_ShowString(5, 20, "system initializing", OLED_6X8);
-    OLED_ShowString(5, 40, "intoing system...", OLED_6X8);
+    OLED_ShowString(5, 40, "intoing system", OLED_6X8);
+    OLED_ShowString(95, 40, APP_VERSION, OLED_6X8);
     OLED_Update();
     HAL_Delay(1000);
     p_dev->ops.refresh((void *)p_dev);

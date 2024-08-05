@@ -2,7 +2,8 @@
 #define __TASK_BUZZER_H__
 
 /* ---------------------------- user header file ---------------------------- */
-#include "main.h"
+#include "task_schedule.h"
+#include "device_buzzer.h"
 
 /* ---------------------------- macro definition ---------------------------- */
 

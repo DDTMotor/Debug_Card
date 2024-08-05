@@ -17,6 +17,7 @@ typedef struct
     void (*parse_data)(void *p_self);
     void (*receive_buff)(void *p_self);
     void (*send_drive)(void *p_self);
+    void (*send_enable)(void *p_self);
     void (*send_set_mode)(void *p_self);
     void (*send_set_feedback_time)(void *p_self);
     void (*send_set_id)(void *p_self);

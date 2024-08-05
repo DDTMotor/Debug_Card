@@ -1,6 +1,5 @@
 /* ---------------------------- user header file ---------------------------- */
 #include "task_buzzer.h"
-#include "device_buzzer.h"
 
 /***** here it is function Definition ********************/
 

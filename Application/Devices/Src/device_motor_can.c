@@ -53,45 +53,24 @@ motor_device_can_t *motor_device_can_get_pointer(void)
 
 /* ------------------ private operation function definition ----------------- */
 
-/**
- * ******************************************************************************
- * @brief 	: the can motor analyzes the feedback data
- * @param 	  p_self  	: Pointer to the device structure.
- * @author 	: chenningzhan
- * @note 	: None
- * ******************************************************************************
- */
-static void motor_device_can_ops_parse_data(void *p_self)
+static void motor_device_can_ops_enable(void *p_self)
 {
-    motor_device_can_t *dev = (motor_device_can_t *)p_self;
+    motor_device_can_t *p_dev = (motor_device_can_t *)p_self;
 
-    switch (dev->motor_index)
-    {
-    case MOTOR_ID_M1502E:
-    case MOTOR_ID_M1502D:
-    case MOTOR_ID_M1505A:
-        if ((AGT_CAN_STD_DRIVE_RX + dev->motor_id) == dev->hrx.StdId)
-        {
-            dev->motor_rec.speed = ((int16_t)((dev->buff_rx[0] << 8) + dev->buff_rx[1])) / 100.f;
-            dev->motor_rec.current = ((dev->buff_rx[2] << 8) + dev->buff_rx[3]);
-            dev->motor_rec.position = ((dev->buff_rx[4] << 8) + dev->buff_rx[5]);
-            dev->motor_rec.errcode = (dev->buff_rx[6]);
-            dev->motor_rec.mode = (dev->buff_rx[7]);
-        }
-        break;
-    case MOTOR_ID_P1010A:
-    case MOTOR_ID_P1010B:
-        if (AGT_CAN_STD_RX_FEEDBACK == dev->hrx.StdId)
-        {
-            dev->motor_rec.speed = ((int16_t)((dev->buff_rx[0] << 8) + dev->buff_rx[1])) / 10.f;
-            dev->motor_rec.current = ((dev->buff_rx[2] << 8) + dev->buff_rx[3]) / 100.f;
-            dev->motor_rec.position = ((dev->buff_rx[4] << 8) + dev->buff_rx[5]);
-            dev->motor_rec.temperature = ((dev->buff_rx[6] << 8) + dev->buff_rx[7]);
-        }
-        break;
-    default:
-        break;
-    }
+    CAN_FilterTypeDef can_filter_st;
+    can_filter_st.FilterActivation = ENABLE;
+    can_filter_st.FilterMode = CAN_FILTERMODE_IDMASK;
+    can_filter_st.FilterScale = CAN_FILTERSCALE_32BIT;
+    can_filter_st.FilterIdHigh = 0x0000;
+    can_filter_st.FilterIdLow = 0x0000;
+    can_filter_st.FilterMaskIdHigh = 0x0000;
+    can_filter_st.FilterMaskIdLow = 0x0000;
+    can_filter_st.FilterBank = 0;
+    can_filter_st.FilterFIFOAssignment = CAN_RX_FIFO0;
+
+    HAL_CAN_ConfigFilter(p_dev->hcanx, &can_filter_st);
+    HAL_CAN_ActivateNotification(p_dev->hcanx, CAN_IT_RX_FIFO0_MSG_PENDING);
+    HAL_CAN_Start(p_dev->hcanx);
 }
 
 /**
@@ -130,6 +109,48 @@ static void motor_device_can_ops_reinit(void *p_self)
     {
         HAL_CAN_Start(&hcan);
         LOG_DEBUG("reinit motor can device success");
+    }
+}
+
+
+/**
+ * ******************************************************************************
+ * @brief 	: the can motor analyzes the feedback data
+ * @param 	  p_self  	: Pointer to the device structure.
+ * @author 	: chenningzhan
+ * @note 	: None
+ * ******************************************************************************
+ */
+static void motor_device_can_ops_parse_data(void *p_self)
+{
+    motor_device_can_t *dev = (motor_device_can_t *)p_self;
+
+    switch (dev->motor_index)
+    {
+    case MOTOR_ID_M1502E:
+    case MOTOR_ID_M1502D:
+    case MOTOR_ID_M1505A:
+        if ((AGT_CAN_STD_DRIVE_RX + dev->motor_id) == dev->hrx.StdId)
+        {
+            dev->motor_rec.speed = ((int16_t)((dev->buff_rx[0] << 8) + dev->buff_rx[1])) / 100.f;
+            dev->motor_rec.current = ((dev->buff_rx[2] << 8) + dev->buff_rx[3]);
+            dev->motor_rec.position = ((dev->buff_rx[4] << 8) + dev->buff_rx[5]);
+            dev->motor_rec.errcode = (dev->buff_rx[6]);
+            dev->motor_rec.mode = (dev->buff_rx[7]);
+        }
+        break;
+    case MOTOR_ID_P1010A:
+    case MOTOR_ID_P1010B:
+        if (AGT_CAN_STD_RX_FEEDBACK == dev->hrx.StdId)
+        {
+            dev->motor_rec.speed = ((int16_t)((dev->buff_rx[0] << 8) + dev->buff_rx[1])) / 10.f;
+            dev->motor_rec.current = ((dev->buff_rx[2] << 8) + dev->buff_rx[3]) / 100.f;
+            dev->motor_rec.position = ((dev->buff_rx[4] << 8) + dev->buff_rx[5]);
+            dev->motor_rec.temperature = ((dev->buff_rx[6] << 8) + dev->buff_rx[7]);
+        }
+        break;
+    default:
+        break;
     }
 }
 
@@ -177,7 +198,8 @@ static void motor_device_can_ops_get_baudrate(void *p_self)
     dev->baudrate = baudrate_temp;
 }
 
-static void motor_device_can_ops_enable(void *p_self)
+
+static void motor_device_can_ops_send_enable(void *p_self)
 {
     motor_device_can_t *dev = (motor_device_can_t *)p_self;
     motor_can_send_enable(dev->hcanx,
@@ -294,14 +316,14 @@ void motor_device_can_register(p_callback_func_dev p_func)
     // set operation function
     p_dev->ops.reinit = motor_device_can_ops_reinit;
     p_dev->ops.enable = motor_device_can_ops_enable;
+    
     p_dev->ops.parse_data = motor_device_can_ops_parse_data;
-
+    p_dev->ops.send_enable = motor_device_can_ops_send_enable;
     p_dev->ops.send_drive = motor_can_ops_send_drive;
     p_dev->ops.send_set_mode = motor_can_ops_send_set_mode;
     p_dev->ops.send_set_feedback_time = motor_can_ops_send_set_feedback_time;
     p_dev->ops.send_set_id = motor_can_ops_send_set_id;
     p_dev->ops.send_set_res = motor_can_ops_send_set_res;
-
     p_dev->ops.get_index = motor_device_can_ops_get_index;
     p_dev->ops.get_means = motor_device_can_ops_get_means;
     p_dev->ops.get_target = motor_device_can_ops_get_target;

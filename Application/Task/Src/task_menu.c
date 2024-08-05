@@ -204,6 +204,7 @@ void menu_page_second(void)
     case MOTOR_ID_M0602C:
     case MOTOR_ID_M1502E:
     case MOTOR_ID_M1502D:
+    case MOTOR_ID_M1505A:        
         OLED_ShowString(pixels_x_1, pixels_y_3, "error :", OLED_8X16);
         OLED_ShowNum(pixels_x_2, pixels_y_3, (uint32_t)errcode, 2, OLED_8X16);
         break;

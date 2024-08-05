@@ -49,23 +49,23 @@ const key_device_resources_t g_key_device_resources[KEY_ID_COUNT] =
 /**
  * ******************************************************************************
  * @brief 	: get a pointer to an device based on its index.
- * @param 	: arg_index [in/out], The index of the key device.
+ * @param 	  index  	: ¡¾parameter¡¿
  * @retval 	: This device index corresponds to a device pointer.
  * @author 	: chenningzhan
- * @note	: If the index is out of range, it logs an error and returns NULL.
- * @note	: An open interface for other modules to call to get a device pointer
+ * @note 	: If the index is out of range, it logs an error and returns NULL.
+ *            An open interface for other modules to call to get a device pointer
  * ******************************************************************************
  */
-key_device_t *key_device_get_pointer(key_device_index_t arg_index)
+key_device_t *key_device_get_pointer(key_device_index_t index)
 {
-    if (arg_index < 0 || arg_index >= KEY_ID_COUNT)
+    if (index < 0 || index >= KEY_ID_COUNT)
     {
         LOG_ERROR("get pointer index out of range");
         return NULL;
     }
     else
     {
-        return &g_key_devices[arg_index];
+        return &g_key_devices[index];
     }
 }
 
@@ -179,9 +179,9 @@ static void key_device_ops_update_status(void *p_self)
 /**
  * ******************************************************************************
  * @brief 	: register keys device with its associated callback function.
- * @param 	: p_func [in/out], The callback function pointer for the device operations.
+ * @param 	  p_func  	: The callback function pointer for the device operations.
  * @author 	: chenningzhan
- * @note	: None
+ * @note 	: None
  * ******************************************************************************
  */
 void key_device_register(p_callback_func_dev p_func)

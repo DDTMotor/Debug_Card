@@ -39,7 +39,7 @@
 /**
  * @brief the macro is used to debug log functions
  */
-#define DEBUG_LOG_ENABLE 1
+#define DEBUG_LOG_ENABLE 0
 
 /* ---------------------------- user header file ---------------------------- */
 #include <string.h>

@@ -18,10 +18,10 @@
 *Log.*
 
 #忽略.gitignore根目录下的文件夹，根据自己的需要修改
-#vscode配置
 .vscode/
 *.code-workspace
 **/.vscode/
+.clang-format
 build/
 
 #不能忽略的文件

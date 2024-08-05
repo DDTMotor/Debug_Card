@@ -1,52 +1,29 @@
-# Prerequisites
-*.d
-
-# Object files
+*.rar
 *.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
+*.d
+*.crf
+*.htm
+*.dep
 *.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
+*.bak
+*.lnp
+*.lst
+*.ini
+*.iex
 *.hex
+*.sct
+*.scvd
+*.dbg*
+*.uvguix.*
+*Log.*
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+#忽略.gitignore根目录下的文件夹，根据自己的需要修改
+.vscode/
+*.code-workspace
+**/.vscode/
+.clang-format
+build/
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+#不能忽略的文件
+!*.h
+!*.c

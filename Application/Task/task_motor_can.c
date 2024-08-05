@@ -91,7 +91,7 @@ static void motor_device_can_callback(void *p_self)
 
     // update the motor index last time
     index_last = p_dev->motor_index;
-    
+
     // drive the motor device
     if (MEANS_CAN == p_dev->motor_means)
     {
@@ -118,7 +118,7 @@ void mytask_can_entry(void *p_self)
         // register the device operation callback function
         motor_device_can_register(motor_device_can_callback);
         p_dev = motor_device_can_get_pointer();
-        
+
         // check the pointer
         if (NULL == p_dev)
         {
@@ -136,8 +136,8 @@ void mytask_can_entry(void *p_self)
     {
         if (MEANS_CAN == p_dev->motor_means)
         {
-//            p_dev->ops.send_drive((void *)p_dev);
-//            p_dev->ops.parse_data((void *)p_dev);
+            //            p_dev->ops.send_drive((void *)p_dev);
+            //            p_dev->ops.parse_data((void *)p_dev);
         }
     }
 }

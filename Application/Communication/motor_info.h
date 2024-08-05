@@ -39,6 +39,10 @@
 /* ---------------------------- macro definition ---------------------------- */
 
 /* --------------------------- struct and enum definitions --------------------------- */
+
+/**
+ * @brief Motor ID enumeration types supported
+ */
 typedef enum
 {
     MOTOR_ID_M0601C = 0,
@@ -53,28 +57,34 @@ typedef enum
     MOTOR_ID_COUNT,
 } motor_models_index_t;
 
-// the motor communication means enum definition
+/**
+ * @brief the motor communication means enum definition
+ */
 typedef enum
 {
     MEANS_NONE = 0,
-    MEANS_CAN = 1,
-    MEANS_RS485 = 2,
-    MEANS_UART = 3,
+    MEANS_CAN,
+    MEANS_RS485,
+    MEANS_UART,
 } motor_connect_means_t;
 
-// the motor mode enum definition
+/**
+ * @brief the motor mode enum definition
+ */
 typedef enum
 {
     OPEN_VOLTAGE = 0x00,  // Voltage Open Loop
-    LOOP_CURRENT = 0x01,  //
-    LOOP_SPEED = 0x02,    //
+    LOOP_CURRENT = 0x01,  // Current loop
+    LOOP_SPEED = 0x02,    // Speed loop
     LOOP_POSITION = 0x03, // the driving mode is to reach the target position by the shortest route
     MOTOR_START = 0x08,   // M0603A enable
     MOTOR_DISABLE = 0x09, // disabled motor
     MOTOR_ENANLE = 0x0A,  // enable motor (default enable)
 } motor_mode_t;
 
-// the motor recive data structure definition
+/**
+ * @brief the motor feedback data structure definition
+ */
 typedef struct
 {
     uint8_t id;          // ID of motor

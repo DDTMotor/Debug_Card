@@ -47,7 +47,7 @@
 #if (DEBUG_LOG_ENABLE == 1)
 
 /**
- * @brief 两次执行strrchr,对绝对路径字符串裁剪，只显示文件名
+ * @brief STRRCHR is executed twice, clipping the absolute path string to show only the file name
  */
 #define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1) : __FILE__)
 

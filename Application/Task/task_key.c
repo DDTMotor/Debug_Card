@@ -44,10 +44,10 @@
 /**
  * ******************************************************************************
  * @brief 	: Callback function for key device operations.
- * @param 	: p_self [in/out], a pointer to get the device object
+ * @param 	  p_self  	: a pointer to get the device object.
  * @author 	: chenningzhan
- * @note	: The button is pressed and called to handle OLED UI page updates
- * drive motor and other callback functions.
+ * @note 	: The button is pressed and called to handle OLED UI page updates
+ *            and drive motor and other callback functions.
  * ******************************************************************************
  */
 static void key_device_ops_callback(void *p_self)
@@ -75,12 +75,14 @@ static void key_device_ops_callback(void *p_self)
         LOG_DEBUG("KEY_DOWN!");
         break;
     default:
-        break;    
+        break;
     }
     // 1.1 buzzer switch to on
     p_dev_buzzer->call_func((void *)p_dev_buzzer);
+
     // 1.2 oled ui switch
     p_dev_menu->call_func((void *)p_dev_menu);
+
     // 1.3 driver the motor
     p_dev_can->call_func((void *)p_dev_can);
     p_dev_uart->call_func((void *)p_dev_uart);
@@ -89,9 +91,9 @@ static void key_device_ops_callback(void *p_self)
 /**
  * ******************************************************************************
  * @brief 	: Entry function for the key handling task.
- * @param 	: p_self [in/out], a pointer to get the task object
+ * @param 	  p_self  	: a pointer to get the task object.
  * @author 	: chenningzhan
- * @note	: enters a loop to continuously check the status of the key device.
+ * @note 	:  enters a loop to continuously check the status of the key device.
  * ******************************************************************************
  */
 void mytask_key_entry(void *p_self)

@@ -54,13 +54,13 @@ You can use the stm32cubemx software (double-click the  file debugcard.ioc) to d
 
 
 
-![image-20240802111530118](README.assets/image-20240802111530118.png)
+![image-20240802111530118](img/image-20240802111530118.png)
 
 -   GCC
 
 you also can using the GCC build tool chain
 
-![image-20240802140851133](README.assets/image-20240802140851133.png)
+![image-20240802140851133](img/image-20240802140851133.png)
 
 **Jlink Burn and debug**
 
@@ -74,7 +74,7 @@ I use the Jlink debugger and use the SEGGER RTT  with the J-Link RTT Viewer soft
 |    OLED     |                  OLED screen driver library                  |
 | SEGGER_RTT  | The RTT tool, used by J-Link RTT Viewer software, is used to print logs for easy debugging |
 
-![image-20240802143911267](readme.assets/image-20240802143911267.png)
+![image-20240802143911267](img/image-20240802143911267.png)
 
 # debug problem record
 

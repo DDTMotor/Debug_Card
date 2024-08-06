@@ -5,15 +5,15 @@
 
 /**
  * ******************************************************************************
- * @brief 	: 【introduction】
- * @param 	: private_data [in/out], parameter meaning
+ * @brief 	: Callback function for key device operations.
+ * @param 	  p_self  	: a pointer to get the device object.
  * @author 	: chenningzhan
- * @note	: None
+ * @note 	: Is invoked when the button is pressed, giving a Didi sound prompt
  * ******************************************************************************
  */
-static void buzzer_device_ops_callback(void *private_data)
+static void buzzer_device_ops_callback(void *p_self)
 {
-    buzzer_device_t *p_dev = (buzzer_device_t *)private_data;
+    buzzer_device_t *p_dev = (buzzer_device_t *)p_self;
 
     p_dev->ops.control((void *)p_dev, BUZZER_STATUS_ON);
     HAL_Delay(10);
@@ -23,9 +23,9 @@ static void buzzer_device_ops_callback(void *private_data)
 /**
  * ******************************************************************************
  * @brief 	: Entry function for the buzzer handling task.
- * @param 	: p_self [in/out], a pointer to get the task object
+ * @param 	  p_self  	: a pointer to get the task object.
  * @author 	: chenningzhan
- * @note	: None
+ * @note 	:
  * ******************************************************************************
  */
 void mytask_buzzer_entry(void *p_self)

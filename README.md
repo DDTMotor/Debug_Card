@@ -23,6 +23,14 @@ Welcome to the Debug_Card project! Whether you're a contributor or a user, here'
 
 https://github.com/DDTMotor/Debug_Card.git
 
+## Getting the Source Code
+
+To get the source code, clone the repository using Git: 
+
+```bash
+git clone https://github.com/DDTMotor/Debug_Card.git
+```
+
 ## Prerequisites
 
 Before you begin, ensure you have the following prerequisites installed:
@@ -31,14 +39,6 @@ Before you begin, ensure you have the following prerequisites installed:
 -   [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html) for project configuration.
 -   An Integrated Development Environment (IDE) such as [Keil MDK-ARM](https://www.keil.com/mdk5) or [GCC](https://gcc.gnu.org/) for ARM. 
 -   An debug emulator such as J-Link debugger or STLink or DAP-Link
-
-## Getting the Source Code
-
-To get the source code, clone the repository using Git: 
-
-```bash
-git clone https://github.com/DDTMotor/Debug_Card.git
-```
 
 # How to compile?
 
@@ -65,6 +65,10 @@ you also can using the GCC build tool chain
 **Jlink Burn and debug**
 
 I use the Jlink debugger and use the SEGGER RTT  with the J-Link RTT Viewer software to print out the debug log, but you can use other debuggers as well, you just can't print a log using Segger RTT
+
+# documentation
+
+In the first-level Directory of this repository project, you will find the“Doc” folder with the hardware schematics and Development Board instructions. These resources will be useful to you
 
 # project folders explain
 

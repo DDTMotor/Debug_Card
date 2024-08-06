@@ -3,15 +3,16 @@
 #include "device_led.h"
 
 /* ---------------------------- macro definition ---------------------------- */
-// macro define the default led color is green
 #define STATUS_LED_INDEX LED_ID_G
+
+/* --------------------------- function definition -------------------------- */
 
 /**
  * ******************************************************************************
  * @brief 	: Entry function for the led handling task.
- * @param 	: p_self [in/out], a pointer to get the task object
+ * @param 	  p_self  	: a pointer to get the task object.
  * @author 	: chenningzhan
- * @note	: enters a loop to Blink a LED
+ * @note 	:  enters a loop to Blink a LED
  * ******************************************************************************
  */
 void mytask_led_entry(void *p_self)
